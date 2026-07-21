@@ -13,12 +13,12 @@
 'use strict';
 
 const PALETTE = {
-  green: '#3f8a5c',
-  gold:  '#d5a029',
-  red:   '#c0392b',
-  track: '#e7eae9',
-  muted: '#8a9490',
-  ink:   '#0f1b17'
+  green: '#3D9A5C',
+  gold:  '#D5A029',
+  red:   '#C0392B',
+  track: '#E4E8EC',
+  muted: '#6B7684',
+  ink:   '#1C2430'
 };
 
 // Grade bands as arc segments, in score order.
@@ -180,14 +180,14 @@ function renderGauge(result, opts) {
   const dialBottom = cy + (r + sw / 2);
   parts.push(
     `<text x="${cx}" y="${(dialBottom + size * 0.147).toFixed(2)}" text-anchor="middle" ` +
-    `font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif" ` +
+    `font-family="Inter,system-ui,sans-serif" ` +
     `font-size="${(size * 0.20).toFixed(1)}" font-weight="800" fill="${active}" ` +
     `letter-spacing="-1.5">${score}<tspan font-size="${(size * 0.078).toFixed(1)}" ` +
     `fill="${PALETTE.muted}" font-weight="600" dx="1">/100</tspan></text>`
   );
   parts.push(
     `<text x="${cx}" y="${(dialBottom + size * 0.227).toFixed(2)}" text-anchor="middle" ` +
-    `font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Helvetica,Arial,sans-serif" ` +
+    `font-family="Inter,system-ui,sans-serif" ` +
     `font-size="${(size * 0.058).toFixed(1)}" font-weight="700" fill="${PALETTE.ink}" ` +
     `letter-spacing="2.6">GRADE ${result.grade}</text>`
   );
@@ -198,12 +198,12 @@ function renderGauge(result, opts) {
   const lblSize = (size * 0.05).toFixed(1);
   parts.push(
     `<text x="${l0.x.toFixed(2)}" y="${(l0.y + 4).toFixed(2)}" text-anchor="middle" ` +
-    `font-family="-apple-system,sans-serif" font-size="${lblSize}" font-weight="600" ` +
+    `font-family="Inter,system-ui,sans-serif" font-size="${lblSize}" font-weight="600" ` +
     `fill="${PALETTE.muted}">0</text>`
   );
   parts.push(
     `<text x="${l1.x.toFixed(2)}" y="${(l1.y + 4).toFixed(2)}" text-anchor="middle" ` +
-    `font-family="-apple-system,sans-serif" font-size="${lblSize}" font-weight="600" ` +
+    `font-family="Inter,system-ui,sans-serif" font-size="${lblSize}" font-weight="600" ` +
     `fill="${PALETTE.muted}">100</text>`
   );
 
