@@ -8,7 +8,7 @@
  * Run: node gauge.geometry.test.js
  */
 
-const { renderGauge } = require('./gauge.js');
+const { renderGauge } = require('../src/gauge.js');
 
 let pass = 0, fail = 0;
 const failures = [];
