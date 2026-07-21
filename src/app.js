@@ -108,10 +108,16 @@
     }).join('');
 
     var pend = counts.pending;
-    document.getElementById('queueMeta').innerHTML =
+    document.getElementById('queueMeta').textContent =
       pend === 0
-        ? 'Queue clear'
-        : '<b>' + pend + '</b> waiting on you';
+        ? 'Queue clear. Nothing waiting on a decision.'
+        : pend + ' waiting on a decision';
+
+    var nc = document.getElementById('navCount');
+    if (nc) {
+      nc.textContent = pend;
+      nc.style.display = pend === 0 ? 'none' : '';
+    }
   }
 
   function requestCard(row) {
@@ -156,7 +162,7 @@
           '</span>' +
           '<span class="tags">' +
             tags.map(function (t) {
-              return '<span class="tag ' + t[0] + '">' + esc(t[1]) + '</span>';
+              return '<span class="chip ' + t[0] + '">' + esc(t[1]) + '</span>';
             }).join('') +
           '</span>' +
         '</span>' +
@@ -208,11 +214,11 @@
 
     return '' +
       '<div class="card">' +
-        '<div class="label">Scorecard</div>' +
+        '<div class="card-hd">Scorecard</div>' +
         rows +
         modLine +
         '<div class="totals"><span class="k">Total</span>' +
-        '<span class="v">' + r.total + '<em style="font-style:normal;color:var(--muted);font-size:12px;font-weight:600">/100</em></span></div>' +
+        '<span class="v">' + r.total + '<em>/100</em></span></div>' +
       '</div>';
   }
 
@@ -220,7 +226,7 @@
     var out = '';
 
     if (r.disqualifiers.length) {
-      out += '<div class="card dq"><div class="label red">Automatic decline</div>' +
+      out += '<div class="card dq"><div class="card-hd red">Automatic decline</div>' +
         r.disqualifiers.map(function (d) {
           return '<div class="flag-item"><div class="ft"><span class="sev red"></span>' +
             esc(d.label) + '</div><div class="fd">' + esc(d.detail) + '</div></div>';
@@ -228,7 +234,7 @@
     }
 
     if (r.reviewNotes && r.reviewNotes.length) {
-      out += '<div class="card"><div class="label">Owner review</div>' +
+      out += '<div class="card"><div class="card-hd">Owner review</div>' +
         r.reviewNotes.map(function (d) {
           return '<div class="flag-item"><div class="ft"><span class="sev amber"></span>' +
             esc(d.label) + '</div><div class="fd">' + esc(d.detail) + '</div></div>';
@@ -239,7 +245,7 @@
       return !r.disqualifiers.some(function (d) { return d.code === f.code; });
     });
     if (fl.length) {
-      out += '<div class="card"><div class="label">What the score can\'t see</div>' +
+      out += '<div class="card"><div class="card-hd">What the score can\'t see</div>' +
         fl.map(function (f) {
           return '<div class="flag-item"><div class="ft"><span class="sev ' +
             (f.severity || 'amber') + '"></span>' + esc(f.label) + '</div>' +
@@ -275,7 +281,7 @@
         '</ul>';
     }
 
-    return '<div class="card"><div class="label">The account</div>' + body + '</div>';
+    return '<div class="card"><div class="card-hd">The account</div>' + body + '</div>';
   }
 
   function eventCard(row) {
@@ -283,8 +289,8 @@
     var r = row.result;
     return '' +
       '<div class="card">' +
-        '<div class="label">The request</div>' +
-        '<p style="font-size:13px;color:var(--ink-2);line-height:1.6;margin-bottom:13px">' +
+        '<div class="card-hd">The request</div>' +
+        '<p style="font-size:13px;line-height:1.6;margin-bottom:14px">' +
           esc(q.description || '') + '</p>' +
         '<ul class="facts">' +
           '<li><b>The ask</b><span>' +
@@ -327,8 +333,8 @@
     return '' +
       '<div class="decide">' +
         '<div class="btns">' +
-          '<button class="btn go" data-decide="approved" data-id="' + row.meta.id + '">Approve</button>' +
-          '<button class="btn no" data-decide="declined" data-id="' + row.meta.id + '">Decline</button>' +
+          '<button class="btn btn-green" data-decide="approved" data-id="' + row.meta.id + '">Approve</button>' +
+          '<button class="btn btn-red" data-decide="declined" data-id="' + row.meta.id + '">Decline</button>' +
         '</div>' +
       '</div>';
   }
