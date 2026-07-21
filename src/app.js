@@ -151,21 +151,20 @@
 
     return '' +
       '<button class="req" data-id="' + row.meta.id + '">' +
-        '<span class="dial">' + GivingGaugeDial.renderGauge(r, { size: 82, showTicks: false }) + '</span>' +
-        '<span>' +
-          '<h3>' + esc(q.orgName) + '</h3>' +
-          '<span class="line">' +
-            '<span class="status-dot ' + dotClass + '"></span>' +
-            esc(q.eventName || 'Request') + ' &middot; ' + esc(q.city) + ' &middot; ' +
-            daysLabel(r.daysOut) + ' out' +
-            (ovr ? ' &middot; owner override' : '') +
-          '</span>' +
-          '<span class="tags">' +
-            tags.map(function (t) {
-              return '<span class="chip ' + t[0] + '">' + esc(t[1]) + '</span>';
-            }).join('') +
-          '</span>' +
+        '<span class="dial">' + GivingGaugeDial.renderGauge(r, { size: 168 }) + '</span>' +
+        '<h3>' + esc(q.orgName) + '</h3>' +
+        '<span class="line">' +
+          '<span class="status-dot ' + dotClass + '"></span>' +
+          esc(q.eventName || 'Request') + '<br>' +
+          esc(q.city) + ' &middot; ' + daysLabel(r.daysOut) + ' out' +
+          (ovr ? ' &middot; owner override' : '') +
         '</span>' +
+        '<span class="tags">' +
+          tags.map(function (t) {
+            return '<span class="chip ' + t[0] + '">' + esc(t[1]) + '</span>';
+          }).join('') +
+        '</span>' +
+        '<span class="spacer"></span>' +
         '<span class="verdict ' + verdictTone + '">' + esc(verdictText) + '</span>' +
       '</button>';
   }
