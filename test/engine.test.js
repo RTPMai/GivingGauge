@@ -8,7 +8,7 @@
  * blank fields, and the religious-customer carve-out.
  */
 
-const GG = require('./scoring-engine.js');
+const GG = require('../src/scoring-engine.js');
 
 let pass = 0, fail = 0;
 const failures = [];
